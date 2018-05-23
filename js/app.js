@@ -4,14 +4,15 @@ var map;
 var markers = [];
 
 function initMap() {
-  // Constructor creates a new map - only center and zoom are required.
+  // Create new map
+	// Set map's center to Philadelphia
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 39.9524, lng: -75.1636},
     zoom: 4,
 		mapTypeControl: false
   });
 
-  // Set initial locations
+  // Set initial locations for cheesesteak spots
   var locations = [
     {title: "Steve's Prince of Steaks", location: {lat: 40.045603, lng: -75.060888}},
     {title: "Jim's Steaks", location: {lat: 39.941556, lng: -75.149310}},
@@ -23,15 +24,17 @@ function initMap() {
 		{title: "Tony Luke's", location: {lat: 39.914103, lng: -75.148756}}
   ];
 
+	// Create new infowindow
+	// Create bounds variable
   var largeInfowindow = new google.maps.InfoWindow();
   var bounds = new google.maps.LatLngBounds();
 
-  // The following group uses the location array to create an array of markers on initialize.
+  // Use location array to initialize markers
   for (var i = 0; i < locations.length; i++) {
-    // Get the position from the location array.
+    // Update position and title from each location within array
     var position = locations[i].location;
     var title = locations[i].title;
-    // Create a marker per location, and put into markers array.
+    // Create a marker for the current location
     var marker = new google.maps.Marker({
       map: map,
       position: position,
@@ -39,15 +42,19 @@ function initMap() {
       animation: google.maps.Animation.DROP,
       id: i
     });
-    // Push the marker to our array of markers.
+
+    // Push (add) the marker to our array of markers.
     markers.push(marker);
-    // Create an onclick event to open an infowindow at each marker.
+
+    // Create a click event on markers which opens an infowindow for selected marker.
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
     });
     bounds.extend(markers[i].position);
   }
+
   // Extend the boundaries of the map for each marker
+	// Ensures that all markers are visible when map is initialized
   map.fitBounds(bounds);
 }
 
