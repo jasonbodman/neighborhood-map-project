@@ -70,7 +70,8 @@ function populateInfoWindow(marker, infowindow) {
     infowindow.addListener('closeclick', function() {
       infowindow.marker = null;
     });
-    var streetViewService = new google.maps.StreetViewService();
+
+		var streetViewService = new google.maps.StreetViewService();
     var radius = 50;
     // In case the status is OK, which means the pano was found, compute the
     // position of the streetview image, then calculate the heading, then get a
@@ -80,7 +81,7 @@ function populateInfoWindow(marker, infowindow) {
         var nearStreetViewLocation = data.location.latLng;
         var heading = google.maps.geometry.spherical.computeHeading(
           nearStreetViewLocation, marker.position);
-          infowindow.setContent('<div>' + marker.title + '</div><br><div id="pano">' + data.location.latLng + '</div>');
+          infowindow.setContent('<div>' + marker.title + '</div><br><div id="pano"></div>');
           var panoramaOptions = {
 						navigationControl: false,
 						addressControl: false,
