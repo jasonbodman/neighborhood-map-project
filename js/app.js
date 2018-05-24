@@ -83,10 +83,17 @@ function populateInfoWindow(marker, infowindow) {
           nearStreetViewLocation, marker.position);
           infowindow.setContent('<div>' + marker.title + '</div><br><div id="pano">' + data.location.latLng + '</div>');
           var panoramaOptions = {
+						navigationControl: false,
+						addressControl: false,
+						enableCloseButton: false,
+						fullscreenControl: false,
+						panControl: false,
+						clickToGo: false,
+						disableDefaultUI: true,
             position: nearStreetViewLocation,
             pov: {
               heading: heading,
-              pitch: 30
+              pitch: 10
             }
           };
         var panorama = new google.maps.StreetViewPanorama(
