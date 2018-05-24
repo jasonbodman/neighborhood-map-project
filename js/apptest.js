@@ -57,6 +57,7 @@ Location = function(data) {
 
 	 // This is what the infowindow will contain when clicked.
 	 this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
+	 		 '<div class="pano"></div>"'
 			 '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
 			 '<div class="content">' + self.street + "</div>" +
 			 '<div class="content">' + self.city + "</div>" +
@@ -85,7 +86,6 @@ Location = function(data) {
 	 // When marker is clicked on open up infowindow designated to the marker with it's information.
 	 this.marker.addListener('click', function(){
 			 self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
-			 		 '<div class="pano"></div>' +
 					 '<div class="content"><a href="' + self.URL +'">' + self.URL + "</a></div>" +
 					 '<div class="content">' + self.street + "</div>" +
 					 '<div class="content">' + self.city + "</div>" +
