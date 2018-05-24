@@ -8,20 +8,19 @@ function initMap() {
 	// Set map's center to Philadelphia
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 39.9524, lng: -75.1636},
-    zoom: 4,
+    zoom: 8,
 		mapTypeControl: false
   });
 
   // Set initial locations for cheesesteak spots
   var locations = [
-    {title: "Steve's Prince of Steaks", location: {lat: 40.045603, lng: -75.060888}},
-    {title: "Jim's Steaks", location: {lat: 39.941556, lng: -75.149310}},
-    {title: "Delassandro's Steaks", location: {lat: 40.029478, lng: -75.205988}},
-    {title: "Rocky's Glenside", location: {lat: 40.100190, lng: -75.152634}},
-    {title: "Talk of the Town", location: {lat: 39.912618, lng: -75.172882}},
-		{title: "Pat's King of Steaks", location: {lat: 39.933191, lng: -75.159235}},
-		{title: "Geno's Steaks", location: {lat: 39.933824, lng: -75.158839}},
-		{title: "Tony Luke's", location: {lat: 39.914103, lng: -75.148756}}
+    {title: "Steve's Prince of Steaks", location: {lat: 40.045603, lng: -75.060888}, neighborhood: "Northeast"},
+    {title: "Jim's Steaks", location: {lat: 39.941556, lng: -75.149310}, neighborhood: "Center City"},
+    {title: "Delassandro's Steaks", location: {lat: 40.029478, lng: -75.205988}, neighborhood: "Roxborough"},
+    {title: "Talk of the Town", location: {lat: 39.912618, lng: -75.172882}, neighborhood: "South Philadelphia"},
+		{title: "Pat's King of Steaks", location: {lat: 39.933191, lng: -75.159235}, neighborhood: "Passyunk"},
+		{title: "Geno's Steaks", location: {lat: 39.933824, lng: -75.158839}, neighborhood: "Passyunk"},
+		{title: "Tony Luke's", location: {lat: 39.914103, lng: -75.148756}, neighborhood: "South Philadelphia"}
   ];
 
 	// Create new infowindow
