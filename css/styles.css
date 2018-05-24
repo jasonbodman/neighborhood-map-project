@@ -9,6 +9,17 @@ html, body {
   padding: 0;
 }
 
+#sidebar {
+	background: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  line-height: 35px;
+  padding: 10px 10px 30px 10px;
+  text-align: left;
+  width: 100%;
+	min-height: 150px;
+}
+
 #map {
   height: 100%;
 }
