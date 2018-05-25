@@ -60,7 +60,8 @@ Location = function(data) {
 			 '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
 			 '<div class="content">' + self.street + "</div>" +
 			 '<div class="content">' + self.city + "</div>" +
-			 '<div class="content">' + self.phone + "</div></div>";
+			 '<div class="content">' + self.phone + "</div></div>"+
+			 '<div class="content">Information provided by <a href="www.foursquare.com">Foursquare</a>.</div></div>';
 
 	 // Puts the content string inside infowindow.
 	 this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
@@ -85,11 +86,11 @@ Location = function(data) {
 	 // When marker is clicked on open up infowindow designated to the marker with it's information.
 	 this.marker.addListener('click', function(){
 			 self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
-			 		 '<div class="pano"></div>' +
 					 '<div class="content"><a href="' + self.URL +'">' + self.URL + "</a></div>" +
 					 '<div class="content">' + self.street + "</div>" +
 					 '<div class="content">' + self.city + "</div>" +
-					 '<div class="content"><a href="tel:' + self.phone +'">' + self.phone +"</a></div></div>";
+					 '<div class="content"><a href="tel:' + self.phone +'">' + self.phone +"</a></div>" +
+					 '<div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
 
 			 self.infoWindow.setContent(self.contentString);
 
@@ -144,36 +145,6 @@ function ViewModel(){
 					 self.toggleSymbol('hide');
 			 }
 	 };
-
-	 // Streetview Functionality
-	 var streetViewService = new google.maps.StreetViewService();
-	 var radius = 50;
-	 // In case the status is OK, which means the pano was found, compute the
-	 // position of the streetview image, then calculate the heading, then get a
-	 // panorama from that and set the options
-	 function getStreetView(data, status) {
-	 	if (status == google.maps.StreetViewStatus.OK) {
-	 		var nearStreetViewLocation = data.location.latLng;
-	 		var heading = google.maps.geometry.spherical.computeHeading(
-	 			nearStreetViewLocation, marker.position);
-	 			var panoramaOptions = {
-	 				navigationControl: false,
-	 				addressControl: false,
-	 				enableCloseButton: false,
-	 				fullscreenControl: false,
-	 				panControl: false,
-	 				clickToGo: false,
-	 				disableDefaultUI: true,
-	 				position: nearStreetViewLocation,
-	 				pov: {
-	 					heading: heading,
-	 					pitch: 10
-	 				}
-	 			};
-	 		var panorama = new google.maps.StreetViewPanorama(
-	 			document.getElementById('pano'), panoramaOptions);
-	 	}
-
 
 	 // Pushes default locations array into new location list array
 	 defaultLocations.forEach(function(locationItem){
