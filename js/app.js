@@ -61,7 +61,7 @@ Location = function(data) {
 			 '<div class="content">' + self.street + "</div>" +
 			 '<div class="content">' + self.city + "</div>" +
 			 '<div class="content">' + self.phone + "</div></div>"+
-			 '<div class="content">Information provided by <a href="www.foursquare.com">Foursquare</a>.</div></div>';
+			 '<div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
 
 	 // Puts the content string inside infowindow.
 	 this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
