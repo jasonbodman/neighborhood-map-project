@@ -8,6 +8,10 @@ var Location;
 var clientID;
 var clientSecret;
 
+// create a global variable for last marker
+var lastClickedMarker = null;
+var openedInfoWindow = null;
+
 // Default Locations that are displayed on the map
 var defaultLocations = [
 	{name: "Steve's Prince of Steaks", lat: 40.045603, long: -75.060888, neighborhood: "Northeast"},
@@ -61,7 +65,7 @@ Location = function(data) {
 			 '<div class="content">' + self.street + "</div>" +
 			 '<div class="content">' + self.city + "</div>" +
 			 '<div class="content">' + self.phone + "</div></div>"+
-			 '<div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
+			 '<br><div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
 
 	 // Puts the content string inside infowindow.
 	 this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
@@ -85,21 +89,38 @@ Location = function(data) {
 
 	 // When marker is clicked on open up infowindow designated to the marker with it's information.
 	 this.marker.addListener('click', function(){
+			 // close opened infoWindow
+			 if (openedInfoWindow) {
+				 openedInfoWindow.close();
+			 }
+
+			 var cancelAnimation = function() {
+				 lastClickedMarker.setAnimation(null);
+				 lastClickedMarker = null;
+			 };
+
+			 if (lastClickedMarker) {
+				 cancelAnimation();
+			 }
+
 			 self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
 					 '<div class="content"><a href="' + self.URL +'">' + self.URL + "</a></div>" +
 					 '<div class="content">' + self.street + "</div>" +
 					 '<div class="content">' + self.city + "</div>" +
 					 '<div class="content"><a href="tel:' + self.phone +'">' + self.phone +"</a></div>" +
-					 '<div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
+					 '<br><div class="content">Information provided by <a href="http://www.foursquare.com">Foursquare</a>.</div></div>';
 
 			 self.infoWindow.setContent(self.contentString);
+			 openedInfoWindow = self.infoWindow;
 
-			 self.infoWindow.open(map, this);
-
+			 self.infoWindow.open(map, self.marker);
 			 self.marker.setAnimation(google.maps.Animation.BOUNCE);
 			 setTimeout(function() {
 					 self.marker.setAnimation(null);
 			 }, 2100);
+			 lastClickedMarker = self.marker;
+
+			 google.maps.event.addListener(infoWindow, 'closeclick', cancelAnimation);
 	 });
 
 	 // Makes the marker bounce animation whenever clicked.
@@ -128,13 +149,13 @@ function ViewModel(){
 	 // Constructor creates a new map - only center and zoom are required.
 	 map = new google.maps.Map(document.getElementById('map'), {
      center: {lat: 39.9524, lng: -75.1636},
-     zoom: 12,
+     zoom: 11,
  		mapTypeControl: false
    });
 
 	 // Centers map when compass is clicked on.
 	 this.centerMap = function(){
-			 map.setCenter({lat: 41.970329, lng: -87.678778});
+			 map.setCenter({lat: 39.9524, lng: -75.1636});
 	 };
 
 	 //toggles the list view
