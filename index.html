@@ -15,10 +15,18 @@
 <body>
 		<div id="topNav">
 			<h1>Jason's Favorite Cheesesteak Spots</h1>
-			<div class="search" id="search">
-				<input class="search-box" id="search-box" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+			<div class="filter">
+				<div class="search" id="search">
+					<input class="search-box" id="search-box" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+				</div>
+				<div class="app" id="app">
+					<div class="list" id="list">
+						<ul class="results" id="results" data-bind="foreach: filteredList">
+							<li class="place" id="place" data-bind="text: name, click: bounce"></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			
 		</div>
     <div id="map"></div>
 
