@@ -13,10 +13,12 @@
 </head>
 
 <body>
-  <body>
 		<div id="topNav">
 			<h1>Jason's Favorite Cheesesteak Spots</h1>
-			<div id="locationList"></div>
+			<div class="search" id="search">
+				<input class="search-box" id="search-box" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+			</div>
+			
 		</div>
     <div id="map"></div>
 
