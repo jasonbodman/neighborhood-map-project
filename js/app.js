@@ -30,6 +30,7 @@ Location = function(data) {
   this.name = data.name;
   this.lat = data.lat;
   this.long = data.long;
+	this.neighborhood = data.neighborhood;
   this.URL = '';
   this.street = '';
   this.city = '';
