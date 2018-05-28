@@ -17,9 +17,12 @@
 			<h1>Jason's Favorite Cheesesteak Spots</h1>
 			<div class="filter">
 				<div class="search" id="search">
-					<input class="search-box" id="search-box" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+					<input class="search-box" id="search-box" placeholder="Search for your favorite restaurant" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" /></p>
 				</div>
 				<div class="app" id="app">
+					<div class="guide">
+						<p>Click on a restaurant below to learn more:
+					</div>
 					<div class="list" id="list">
 						<ul class="results" id="results" data-bind="foreach: filteredList">
 							<li class="place" id="place" data-bind="text: name, click: bounce"></li>
@@ -28,7 +31,9 @@
 				</div>
 			</div>
 		</div>
-    <div id="map"></div>
+		<div class="mapHolder">
+    	<div id="map"></div>
+		</div>
 
 
 
