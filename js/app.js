@@ -126,7 +126,7 @@ var Location = function(data) {
 
 	this.visible = ko.observable(true);
 
-// Foursquare API data
+	// Foursquare API data
 	// Set Foursquare API details
 	clientID = "U2HV0YOLPT2X5TDODTGJW4YFY4DB0SEXIUM1WI2VSFXK2C3M";
 	clientSecret = "0X5PTPK5X3RVG3JE5T3SMC5W53X2V22KC4RZYZRPG2TRFXO2";
@@ -166,6 +166,7 @@ var Location = function(data) {
 		title: data.name
 	});
 
+	// Sets visibility of markers on map based on this.visible for each location
 	this.showMarker = ko.computed(function() {
 		if (this.visible() === true) {
 			this.marker.setMap(map);
@@ -181,13 +182,11 @@ var Location = function(data) {
 		if (openedInfoWindow) {
 			openedInfoWindow.close();
 		}
-
 		// Set clicked marker as lastClickedMarker
 		var cancelAnimation = function() {
 			lastClickedMarker.setAnimation(null);
 			lastClickedMarker = null;
 		};
-
 		//
 		if (lastClickedMarker) {
 			cancelAnimation();
@@ -266,7 +265,6 @@ function ViewModel(){
 					});
 			}
 	}, self);
-
 }
 
 // Error handling if map doesn't load.
