@@ -14,13 +14,13 @@ var openedInfoWindow = null;
 
 // Default Locations that are displayed on the map
 var defaultLocations = [
-	{name: "Steve's Prince of Steaks", lat: 40.045603, long: -75.060888, neighborhood: "Northeast"},
-	{name: "Jim's Steaks", lat: 39.941556, long: -75.149310, neighborhood: "Center City"},
-	{name: "Delassandro's Steaks", lat: 40.029478, long: -75.205988, neighborhood: "Roxborough"},
-	{name: "Talk of the Town", lat: 39.912618, long: -75.172882, neighborhood: "South Philadelphia"},
-	{name: "Pat's King of Steaks", lat: 39.933191, long: -75.159235, neighborhood: "Passyunk"},
-	{name: "Geno's Steaks", lat: 39.933824, long: -75.158839, neighborhood: "Passyunk"},
-	{name: "Tony Luke's", lat: 39.914103, long: -75.148756, neighborhood: "South Philadelphia"}
+	{name: "Steve's Prince of Steaks", lat: 40.045603, long: -75.060888, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Jim's Steaks", lat: 39.941556, long: -75.149310, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Delassandro's Steaks", lat: 40.029478, long: -75.205988, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Talk of the Town", lat: 39.912618, long: -75.172882, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Pat's King of Steaks", lat: 39.933191, long: -75.159235, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Geno's Steaks", lat: 39.933824, long: -75.158839, showLoc: ko.observable(true), visible: ko.observable(true)},
+	{name: "Tony Luke's", lat: 39.914103, long: -75.148756, showLoc: ko.observable(true), visible: ko.observable(true)}
 ];
 
 //Set Google Maps style
@@ -131,7 +131,7 @@ Location = function(data) {
   this.phone = '';
 
   // Make sure all markers are visible by default
-  this.visible = ko.observable(true);
+ 	this.visible = ko.observable(true);
 
 	// Set Foursquare API details
 	clientID = "U2HV0YOLPT2X5TDODTGJW4YFY4DB0SEXIUM1WI2VSFXK2C3M";
@@ -209,7 +209,7 @@ Location = function(data) {
 		}, 2100);
 		lastClickedMarker = self.marker;
 
-		google.maps.event.addListener(infoWindow, 'closeclick', cancelAnimation);
+		google.maps.event.addListener(this.infoWindow, 'closeclick', cancelAnimation);
 	});
 
 	// Makes the marker bounce animation whenever clicked.
@@ -237,8 +237,8 @@ function ViewModel(){
 
 	// Create new map centered on Philadelphia's City Hall
 	map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 39.9524, lng: -75.1636},
-    zoom: 11,
+    center: {lat: 39.9800, lng: -75.1636},
+    zoom: 11.5,
  		mapTypeControl: false,
 		styles: styles
   });
