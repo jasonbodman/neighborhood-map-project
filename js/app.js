@@ -211,7 +211,6 @@ var Location = function(data) {
 		}, 2100);
 		lastClickedMarker = self.marker;
 
-		google.maps.event.addListener(this.infoWindow, 'closeclick', cancelAnimation);
 	});
 
 	// Makes the marker bounce animation whenever clicked.
