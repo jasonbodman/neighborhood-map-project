@@ -112,7 +112,7 @@ var styles = [
             }
         ]
     }
-]
+];
 
 var Location = function(data) {
 	var self = this;
@@ -167,7 +167,7 @@ var Location = function(data) {
 	});
 
 	this.showMarker = ko.computed(function() {
-		if (this.visible() == true) {
+		if (this.visible() === true) {
 			this.marker.setMap(map);
 		} else {
 			this.marker.setMap(null);
