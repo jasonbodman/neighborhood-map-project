@@ -1,9 +1,6 @@
 // Creates a global map marker
 var map;
 
-// Creates a Global variable for all of the locations
-var Location;
-
 // Declaring Global clientID & secret for Foursquare API
 var clientID;
 var clientSecret;
@@ -117,20 +114,19 @@ var styles = [
     }
 ]
 
+var Location = function(data) {
+	var self = this;
+	this.name = data.name;
+	this.lat = data.lat;
+	this.long = data.long;
+	this.URL = "";
+	this.street = "";
+	this.city = "";
+	this.phone = "";
+
+	this.visible = ko.observable(true);
 
 // Foursquare API data
-Location = function(data) {
-  var self = this;
-  this.name = data.name;
-  this.lat = data.lat;
-  this.long = data.long;
-	this.showLoc = data.showLoc;
-	this.visible = data.visible;
-  this.URL = '';
-  this.street = '';
-  this.city = '';
-  this.phone = '';
-
 	// Set Foursquare API details
 	clientID = "U2HV0YOLPT2X5TDODTGJW4YFY4DB0SEXIUM1WI2VSFXK2C3M";
 	clientSecret = "0X5PTPK5X3RVG3JE5T3SMC5W53X2V22KC4RZYZRPG2TRFXO2";
@@ -149,7 +145,7 @@ Location = function(data) {
 		self.city = results.location.formattedAddress[1] || 'No Address Provided';
 		self.phone = results.contact.formattedPhone || 'No Phone Provided';
 	}).fail(function () {
-		$('.list').html('There was an error with the Foursquare API call. Please refresh the page and try again to load Foursquare data.');
+		$('.list').html('There was an error with the Foursquare data. Please refresh the page and try again to load Foursquare data.');
 	});
 
 	// Set infoWindow content
@@ -169,6 +165,15 @@ Location = function(data) {
 		map: map,
 		title: data.name
 	});
+
+	this.showMarker = ko.computed(function() {
+		if (this.visible() == true) {
+			this.marker.setMap(map);
+		} else {
+			this.marker.setMap(null);
+		}
+		return true;
+	}, this);
 
 	// Open marker when clicked and close previously opened markers
 	this.marker.addListener('click', function(){
@@ -224,9 +229,6 @@ function ViewModel(){
 
 	var self = this;
 
-	// Holds value for list togglings
-	this.toggleSymbol = ko.observable('hide');
-
 	// Set search term to be blank by default
 	this.searchTerm = ko.observable('');
 
@@ -264,6 +266,7 @@ function ViewModel(){
 					});
 			}
 	}, self);
+
 }
 
 // Error handling if map doesn't load.
