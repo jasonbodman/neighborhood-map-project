@@ -13,7 +13,7 @@ var lastClickedMarker = null;
 var openedInfoWindow = null;
 
 // Default Locations that are displayed on the map
-var defaultLocations = [
+var locations = [
 	{name: "Steve's Prince of Steaks", lat: 40.045603, long: -75.060888, showLoc: ko.observable(true), visible: ko.observable(true)},
 	{name: "Jim's Steaks", lat: 39.941556, long: -75.149310, showLoc: ko.observable(true), visible: ko.observable(true)},
 	{name: "Delassandro's Steaks", lat: 40.029478, long: -75.205988, showLoc: ko.observable(true), visible: ko.observable(true)},
@@ -124,14 +124,12 @@ Location = function(data) {
   this.name = data.name;
   this.lat = data.lat;
   this.long = data.long;
-	this.neighborhood = data.neighborhood;
+	this.showLoc = data.showLoc;
+	this.visible = data.visible;
   this.URL = '';
   this.street = '';
   this.city = '';
   this.phone = '';
-
-  // Make sure all markers are visible by default
- 	this.visible = ko.observable(true);
 
 	// Set Foursquare API details
 	clientID = "U2HV0YOLPT2X5TDODTGJW4YFY4DB0SEXIUM1WI2VSFXK2C3M";
@@ -244,7 +242,7 @@ function ViewModel(){
   });
 
 	// Pushes default locations array into new location list array
-	defaultLocations.forEach(function(locationItem){
+	locations.forEach(function(locationItem){
 			self.locationList.push( new Location(locationItem));
 	});
 
