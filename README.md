@@ -17,3 +17,4 @@ This program allows users to click on each marker to view location details. User
 ## References
 - Google Maps Javascript API: https://developers.google.com/maps/documentation/javascript/
 - Foursquare API: https://developer.foursquare.com/
+- W3 School - event onerror: https://www.w3schools.com/Jsref/event_onerror.asp
